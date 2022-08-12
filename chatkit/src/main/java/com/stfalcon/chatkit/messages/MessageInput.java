@@ -50,6 +50,7 @@ public class MessageInput extends RelativeLayout
 
     private CharSequence input;
     private InputListener inputListener;
+    private TextChangeListener textChangeListener;
     private AttachmentsListener attachmentsListener;
     private boolean isTyping;
     private TypingListener typingListener;
@@ -98,6 +99,10 @@ public class MessageInput extends RelativeLayout
         this.attachmentsListener = attachmentsListener;
     }
 
+    public void setTextChangeListener(TextChangeListener textChangeListener) {
+        this.textChangeListener = textChangeListener;
+    }
+
     /**
      * Returns EditText for messages input
      *
@@ -138,7 +143,10 @@ public class MessageInput extends RelativeLayout
     @Override
     public void onTextChanged(CharSequence s, int start, int count, int after) {
         input = s;
-        messageSendButton.setEnabled(input.length() > 0);
+//        messageSendButton.setEnabled(input.length() > 0);
+        if (textChangeListener != null) {
+            textChangeListener.onTextChange(s);
+        }
         if (s.length() > 0) {
             if (!isTyping) {
                 isTyping = true;
@@ -309,5 +317,9 @@ public class MessageInput extends RelativeLayout
          */
         void onStopTyping();
 
+    }
+
+    public interface TextChangeListener {
+        void onTextChange(CharSequence s);
     }
 }
