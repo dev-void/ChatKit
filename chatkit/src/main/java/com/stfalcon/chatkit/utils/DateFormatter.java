@@ -22,6 +22,9 @@ import java.util.Date;
 import java.util.Locale;
 
 public final class DateFormatter {
+
+    private static final Locale arLocal = new Locale("ar");
+
     private DateFormatter() {
         throw new AssertionError();
     }
@@ -32,7 +35,7 @@ public final class DateFormatter {
 
     public static String format(Date date, String format) {
         if (date == null) return "";
-        return new SimpleDateFormat(format, Locale.getDefault())
+        return new SimpleDateFormat(format, arLocal)
                 .format(date);
     }
 
