@@ -1,5 +1,9 @@
 package com.stfalcon.chatkit.messages;
 
+import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
 import android.util.SparseArray;
@@ -11,8 +15,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 
 import com.stfalcon.chatkit.R;
@@ -760,11 +768,44 @@ public class MessageHolders {
             super.onBind(message);
             if (bubble != null) {
                 bubble.setSelected(isSelected());
+                if (message.isDeleted()) {
+                    ViewCompat.setBackground(bubble, deletedDrawable(bubble.getContext()));
+                } else {
+                    ViewCompat.setBackground(bubble, normalDrawable(bubble.getContext()));
+                }
             }
 
             if (text != null) {
                 text.setText(message.getText());
             }
+        }
+
+        private Drawable deletedDrawable(Context context) {
+            return getMessageSelector(context, Color.parseColor("#89A0C4"), Color.parseColor("#3D4F62D7"), R.drawable.shape_outcoming_message);
+        }
+
+        private Drawable normalDrawable(Context context) {
+            return getMessageSelector(context, Color.parseColor("#EFEFEF"), Color.parseColor("#3D4F62D7"), R.drawable.shape_outcoming_message);
+        }
+
+        private Drawable getMessageSelector(Context context, @ColorInt int normalColor, @ColorInt int selectedColor, @DrawableRes int shape) {
+
+            Drawable drawable = DrawableCompat.wrap(getVectorDrawable(context, shape)).mutate();
+            DrawableCompat.setTintList(
+                    drawable,
+                    new ColorStateList(
+                            new int[][]{
+                                    new int[]{android.R.attr.state_selected},
+                                    new int[]{android.R.attr.state_pressed},
+                                    new int[]{-android.R.attr.state_pressed, -android.R.attr.state_selected}
+                            },
+                            new int[]{selectedColor, normalColor, normalColor}
+                    ));
+            return drawable;
+        }
+
+        protected final Drawable getVectorDrawable(Context context, @DrawableRes int drawable) {
+            return ContextCompat.getDrawable(context, drawable);
         }
 
         @Override
@@ -819,11 +860,45 @@ public class MessageHolders {
             super.onBind(message);
             if (bubble != null) {
                 bubble.setSelected(isSelected());
+                if (message.isDeleted()) {
+                    ViewCompat.setBackground(bubble, deletedDrawable(bubble.getContext()));
+                } else {
+                    ViewCompat.setBackground(bubble, normalDrawable(bubble.getContext()));
+                }
             }
 
             if (text != null) {
                 text.setText(message.getText());
             }
+        }
+
+
+        private Drawable deletedDrawable(Context context) {
+            return getMessageSelector(context, Color.parseColor("#89A0C4"), Color.parseColor("#3D4F62D7"), R.drawable.shape_outcoming_message);
+        }
+
+        private Drawable normalDrawable(Context context) {
+            return getMessageSelector(context, Color.parseColor("#4F62D7"), Color.parseColor("#3D4F62D7"), R.drawable.shape_outcoming_message);
+        }
+
+        private Drawable getMessageSelector(Context context, @ColorInt int normalColor, @ColorInt int selectedColor, @DrawableRes int shape) {
+
+            Drawable drawable = DrawableCompat.wrap(getVectorDrawable(context, shape)).mutate();
+            DrawableCompat.setTintList(
+                    drawable,
+                    new ColorStateList(
+                            new int[][]{
+                                    new int[]{android.R.attr.state_selected},
+                                    new int[]{android.R.attr.state_pressed},
+                                    new int[]{-android.R.attr.state_pressed, -android.R.attr.state_selected}
+                            },
+                            new int[]{selectedColor, normalColor, normalColor}
+                    ));
+            return drawable;
+        }
+
+        protected final Drawable getVectorDrawable(Context context, @DrawableRes int drawable) {
+            return ContextCompat.getDrawable(context, drawable);
         }
 
         @Override

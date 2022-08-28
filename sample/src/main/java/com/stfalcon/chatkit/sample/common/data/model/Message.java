@@ -46,6 +46,11 @@ public class Message implements IMessage,
     }
 
     @Override
+    public Boolean isDeleted() {
+        return false;
+    }
+
+    @Override
     public User getUser() {
         return this.user;
     }

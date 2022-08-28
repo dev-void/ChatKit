@@ -50,4 +50,11 @@ public interface IMessage {
      * @return the message creation date
      */
     Date getCreatedAt();
+
+    /**
+     * Returns true if message is deleted
+     *
+     * @return the message creation date
+     */
+    Boolean isDeleted();
 }
