@@ -783,6 +783,14 @@ public class MessageHolders {
                     text.setTextColor(Color.parseColor("#191a1b"));
                 }
             }
+
+            if (time != null) {
+                if (message.isDeleted()) {
+                    time.setTextColor(ContextCompat.getColor(time.getContext(), R.color.white60));
+                } else {
+                    time.setTextColor(Color.parseColor("#979797"));
+                }
+            }
         }
 
         private Drawable deletedDrawable(Context context) {
