@@ -800,8 +800,8 @@ public class MessageHolders {
     public static class OutcomingTextMessageViewHolder<MESSAGE extends IMessage>
             extends BaseOutcomingMessageViewHolder<MESSAGE> {
 
-        protected ViewGroup bubble;
-        protected TextView text;
+        public ViewGroup bubble;
+        public TextView text;
 
         @Deprecated
         public OutcomingTextMessageViewHolder(View itemView) {
