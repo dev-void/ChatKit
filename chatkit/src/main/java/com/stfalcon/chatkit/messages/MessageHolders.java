@@ -777,15 +777,20 @@ public class MessageHolders {
 
             if (text != null) {
                 text.setText(message.getText());
+                if (message.isDeleted()) {
+                    text.setTextColor(Color.WHITE);
+                } else {
+                    text.setTextColor(Color.parseColor("#191a1b"));
+                }
             }
         }
 
         private Drawable deletedDrawable(Context context) {
-            return getMessageSelector(context, Color.parseColor("#89A0C4"), Color.parseColor("#3D4F62D7"), R.drawable.shape_outcoming_message);
+            return getMessageSelector(context, Color.parseColor("#89A0C4"), Color.parseColor("#3D4F62D7"), R.drawable.shape_incoming_message);
         }
 
         private Drawable normalDrawable(Context context) {
-            return getMessageSelector(context, Color.parseColor("#EFEFEF"), Color.parseColor("#3D4F62D7"), R.drawable.shape_outcoming_message);
+            return getMessageSelector(context, Color.parseColor("#EFEFEF"), Color.parseColor("#3D4F62D7"), R.drawable.shape_incoming_message);
         }
 
         private Drawable getMessageSelector(Context context, @ColorInt int normalColor, @ColorInt int selectedColor, @DrawableRes int shape) {
