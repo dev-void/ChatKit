@@ -793,11 +793,11 @@ public class MessageHolders {
             }
         }
 
-        private Drawable deletedDrawable(Context context) {
+        protected Drawable deletedDrawable(Context context) {
             return getMessageSelector(context, Color.parseColor("#A3BCE4"), Color.parseColor("#3D4F62D7"), R.drawable.shape_incoming_message);
         }
 
-        private Drawable normalDrawable(Context context) {
+        protected Drawable normalDrawable(Context context) {
             return getMessageSelector(context, Color.parseColor("#EFEFEF"), Color.parseColor("#3D4F62D7"), R.drawable.shape_incoming_message);
         }
 
@@ -886,11 +886,11 @@ public class MessageHolders {
         }
 
 
-        private Drawable deletedDrawable(Context context) {
+        protected Drawable deletedDrawable(Context context) {
             return getMessageSelector(context, Color.parseColor("#A3BCE4"), Color.parseColor("#3D4F62D7"), R.drawable.shape_outcoming_message);
         }
 
-        private Drawable normalDrawable(Context context) {
+        protected Drawable normalDrawable(Context context) {
             return getMessageSelector(context, Color.parseColor("#4F62D7"), Color.parseColor("#3D4F62D7"), R.drawable.shape_outcoming_message);
         }
 
